@@ -24,6 +24,13 @@ jobs:
           allow_issue_writing: false
           fail_action: false
 
+      - name: Upload ZAP report (viewable in browser)
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          path: report_html.html
+          archive: false
+
       - name: Add ZAP report to job summary
         if: always()
         run: cat report_md.md >> "$GITHUB_STEP_SUMMARY"
