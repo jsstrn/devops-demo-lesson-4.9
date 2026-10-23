@@ -1,4 +1,4 @@
-name: ZAP Baseline Scan
+name: zap-baseline-scan
 
 on:
   workflow_dispatch:       # run it by hand after a deploy
@@ -23,3 +23,7 @@ jobs:
           target: ${{ vars.APP_URL }}
           allow_issue_writing: false
           fail_action: false
+
+      - name: Add ZAP report to job summary
+        if: always()
+        run: cat report_md.md >> "$GITHUB_STEP_SUMMARY"
